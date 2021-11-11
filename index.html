@@ -1,154 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-
-    <!-- ......  -->
-    <!-- PUT YOUR TITLE IN PLACE OF TITLE BELOW: -->
-    <!-- ......  -->
-
-    <title><strong>National Parks see record visitation despite pandemic</strong></title>
-
-    <!-- ... -->
-    <!-- ... -->
-    <!-- ... -->
-
-    <link
-      rel="canonical"
-      href="https://getbootstrap.com/docs/5.0/examples/starter-template/"
-    />
-
-    <!-- Bootstrap core CSS -->
-    <link
-      href="http://pachecod.github.io/bootstrap/assets/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-
-    <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <title>360&deg; Image Gallery</title>
+    <meta name="description" content="360&deg; Image Gallery - A-Frame">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
+    
+    <!-- Image link template to be reused. -->
+    <script id="link" type="text/html">
+      <a-entity class="link"
+        geometry="primitive: plane; height: 1; width: 1"
+        material="shader: flat; src: ${thumb}"
+        event-set__mouseenter="scale: 1.2 1.2 1"
+        event-set__mouseleave="scale: 1 1 1"
+        event-set__click="_target: #image-360; _delay: 300; material.src: ${src}"
+        proxy-event="event: click; to: #image-360; as: fade"
+        sound="on: click; src: #click-sound"></a-entity>
+    </script>
   </head>
   <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <div class="container-fluid">
+    <a-scene>
+      <a-assets>
+        <img id="city" crossorigin="anonymous" src="https://cdn.glitch.me/7ffdb24a-cfde-4a79-bfb1-23fb8e99be26%2FIMG_2236.JPG?v=1636663789532">
+        <img id="city-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg">
+        <img id="cubes-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
+        <img id="sechelt-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg">
+        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+        <img id="cubes" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg">
+        <img id="sechelt" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
 
-        <!-- ... -->
-        <!-- PUT YOUR GITHUB USER NAME IN THE URL BELOW -->
-        <!-- ... -->
+      </a-assets>
 
-        <a class="navbar-brand" href="https://gsmith1623.github.io"
-          >HOME</a
-        >
+      <!-- 360-degree image. -->
+      <a-sky id="image-360" radius="10" src="#city"
+             animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
+             animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"></a-sky>
 
-        <!-- ... -->
-        <!-- ... -->
-        <!-- ... -->
+      <!-- Image links. -->
+     
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarsExampleDefault"
-          aria-controls="navbarsExampleDefault"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <!-- ... -->
-            <!-- REPLACE LINKS AND LINK TITLE BELOW WITH YOUR OWN, OR REMOVE THEM ENTIRELY -->
-            <!-- ... -->
-
-            <li class="nav-item active">
-              <a class="nav-link" aria-current="page" href="https://gsmith1623.github.io/index.html"
-                >MYSTORY</a
-              >
-            </li>
-
-            <!-- ... -->
-            <!-- ... -->
-            <!-- ... -->
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <main class="container">
-      <div class="starter-template text-left py-5 px-3">
-
-        <!-- ... -->
-        <!-- PAGE CONTENT STARTS HERE -->
-        <!-- ... -->
-
-        <p><br /></p>
-
-        <a name="top"></a>
-
-        <h1><strong>
-         National Parks see record visitation despite pandemic</strong>
-        </h1>
-
-        <p>
-          <p><i>
-            By Gillian Smith</i>
-          </p>
-          Semele Turro-Yared was forced to cancel her year-long trip around the world – which was supposed to begin in April 2020 – when COVID-19 hit. Instead, she and her husband Chris put their international travel plans on hold, purchased a van, and spent the past year traveling around the United States. 
-        </p>
-
-        <p>
-          Semele and Chris are only two of thousands of people who decided to visit parks and monuments in the National Park Service during the pandemic. At Cuyahoga Valley National Park – located between the Ohio cities of Cleveland and Akron – more than 517,000 more people visited the park during 2020 than did in 2019 – a 23% increase in visitation, according to data from the park service. 
-        </p>
-        <p>
-          For many, the National Parks were the only places that offered respite from the quarantine and isolation imposed upon the country in the hopes of stopping the spread of the coronavirus. 
-        </p>
-        <p>
-          “We could have stayed doing the vanlife forever,” Turro-Yared said. “From day one, as we’re falling asleep in the van right on a lake, we just said to each other, ‘This is amazing.’”
-</p>
-
-        <p>
-          Here's what we found:
-        </p>
-
-        <iframe title="National Park Visitation By Year and Month" aria-label="chart" id="datawrapper-chart-Nre5n" src="https://datawrapper.dwcdn.net/Nre5n/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="2081"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(e){if(void 0!==e.data["datawrapper-height"]){var t=document.querySelectorAll("iframe");for(var a in e.data["datawrapper-height"])for(var r=0;r<t.length;r++){if(t[r].contentWindow===e.source)t[r].style.height=e.data["datawrapper-height"][a]+"px"}}}))}();</script>
-        
-      </div>
-       <p>
-       During the height of the coronavirus pandemic, Americans were put under varying degrees of restrictions – statewide mask mandates, limited grocery store hours, remote school and work – that left many people feeling trapped inside their homes. For those who had access to transportation, the parks became a place of refuge, where they could be outside and enjoy nature while keeping those around them safe.         
-     </p>
-     <p>
-      Of the top 10 National Parks, seven saw significantly more visitors during September 2020 than they had in September 2019, including Yellowstone, which had 143,996 more visitors than the same time the previous year. While the Grand Canyon saw nearly 330,000 fewer visitors in September 2020, the Great Smoky Mountains welcomed 126,845 more visitors than the year before.
-    </p>
-    </main>
-    <!-- /.container -->
-
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+      <!-- Camera + cursor. -->
+      <a-entity camera look-controls>
+        <a-cursor
+          id="cursor"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          event-set__mouseenter="_event: mouseenter; color: springgreen"
+          event-set__mouseleave="_event: mouseleave; color: black"
+          raycaster="objects: .link"></a-cursor>
+      </a-entity>
+    </a-scene>
   </body>
 </html>
